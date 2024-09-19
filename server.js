@@ -14,6 +14,7 @@ const { PORT, HASS_PORT, EXPOSED_PORT } = process.env;
 const entryMiddleware = async (req, res, next) => {
 	// default
 	let target = process.env.HASS_URL;
+	console.log("Default target: " + target)
 
 	if (ADDON) {
 		// headers
@@ -27,12 +28,14 @@ const entryMiddleware = async (req, res, next) => {
 		// ingress
 		if (source && forwardedProto && forwardedHost) {
 			target = `${forwardedProto}://${forwardedHost}`;
+			console.log("Ingress target: " + target)
 		}
 
 		// exposed port
 		else if (host && EXPOSED_PORT && HASS_PORT) {
 			const proto = req.secure ? 'https' : 'http';
 			target = `${proto}://${host.replace(EXPOSED_PORT, HASS_PORT)}`;
+			console.log("Exposed target: " + target)
 		}
 	}
 
