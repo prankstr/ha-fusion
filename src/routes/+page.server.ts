@@ -43,6 +43,8 @@ export async function load({ request }): Promise<{
 	]);
 
 	// hassUrl from env or server.js
+	console.log('HASS_URL', process.env.HASS_URL);
+	console.log('X-Proxy-Target', request.headers.get('X-Proxy-Target'));
 	configuration.hassUrl = process.env.HASS_URL || request.headers.get('X-Proxy-Target');
 
 	// initialize keys if missing
