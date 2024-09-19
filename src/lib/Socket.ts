@@ -39,6 +39,7 @@ export async function authentication(configuration: Configuration) {
 	}
 
 	let auth: Auth | undefined;
+	console.log('hassUrl', configuration?.hassUrl);
 
 	try {
 		// long lived access token
